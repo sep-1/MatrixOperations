@@ -4,7 +4,12 @@ from flask import Flask
 
 app = Flask(__name__)
 
-
+"""
+function matrixmultiply
+matrixSet - List
+Takes in a list of matrices and recursively multiplies them together, 
+then returns the matrix product.
+"""
 @app.route("/matmultiply/<matrixSet>", methods=["GET"])
 def matrixmultiply(matrixSet):
     if len(matrixSet) == 1:
@@ -25,7 +30,12 @@ def matrixmultiply(matrixSet):
         newmatrix[0] = np.matmul(matrix1, matrix2)
         return matrixmultiply(newmatrix)
         
-        
+"""
+function dotprod
+matrixSet - List
+Takes in a set of two matrices and returns their dot product, or
+zero if the operation can not be completed. 
+"""
 @app.route("/dotprod/<matrixSet>", methods=["GET"])
 def dotprod(matrixSet):
     if len(matrixSet) == 1:
@@ -57,7 +67,12 @@ def dotprod(matrixSet):
             sum1 += matrix1[i] * matrix2[i]
         return np.matrix(sum1)
 
-
+"""
+function det
+matrix1 - List (matrix)
+completes the determinant of the given matrix 
+and returns the product.
+"""
 @app.route("/det/<matrix1>", methods=["GET"])
 def det(matrix1):
     matrix1 = np.matrix(matrix1)
@@ -66,7 +81,12 @@ def det(matrix1):
     a = linalg.det(matrix1)
     return np.matrix(a)
 
-
+"""
+function transpose
+matrix1 - List (matrix)
+completes the transpose of the given matrix 
+and returns the product.
+"""
 @app.route("/transpose/<matrix1>", methods=["GET"])
 def transpose(matrix1):
     matrix1 = np.matrix(matrix1)
